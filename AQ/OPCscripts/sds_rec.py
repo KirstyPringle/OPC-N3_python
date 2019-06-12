@@ -62,8 +62,12 @@ class SDS011:
             
     def process_frame (self,d):
     #Get and Print the wanted data, and put in into a usable data fromet
-        
-        r = struct.unpack('<HHxxBBB', d[2:])
+        try:
+            r = struct.unpack('<HHxxBBB', d[2:])
+        except:
+            print("Failed to unpack d")
+            return
+
         pm25 = r[0]/10.0
         pm10 = r[1]/10.0
         TSP= r[2]/10.0
