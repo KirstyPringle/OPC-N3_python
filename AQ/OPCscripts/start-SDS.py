@@ -55,7 +55,10 @@ def initFile(date,RPI,FOLDER,LOCATION,SENSORS):
                 columns=columns+",sds-pm2.5,sds-pm10,sds-TSP"
      #create the csv
     csvnames=NAMES.replace(",","-") #replace the commers from the Sensors names to add tio file name
-    ofile= FOLDER + LOCATION +"_"+ RPI+'_' +csvnames+"_"+ str(date).replace('-','') + ".csv"
+    print("str(date) = ",str(date))
+
+    ##ofile= FOLDER + LOCATION +"_"+ RPI+'_' +csvnames+"_"+ str(date).replace('-','') + ".csv"
+    ofile= FOLDER + LOCATION +"_"+ RPI+'_' +csvnames+"_"+ str(date.strftime('%d-%m-%Y'))+".csv"
     print("Opening Output File:")
     if(not os.path.isfile(ofile)):
         print("creat new file ",ofile)
@@ -125,11 +128,16 @@ if __name__ == "__main__":
             #set stars
             datestart = datetime.date.today()
             starttime = datetime.datetime.now()
+
             #Create file if not alrady created
-            if MODE=="GPS": #of GPS add the time in mins to the file name
-                f=initFile(startime,RPI,FOLDER,LOCATION,R)
-            else:  #file name just with date
-                f = initFile(datestart,RPI,FOLDER,LOCATION,R)
+            f = initFile(datestart,RPI,FOLDER,LOCATION,R)
+            
+            #if MODE=="GPS": #of GPS add the time in mins to the file name
+            #KP : Commented as filename format is incorrect
+            #    f=initFile(starttime,RPI,FOLDER,LOCATION,R)
+            #else:  #file name just with date
+            #    f = initFile(datestart,RPI,FOLDER,LOCATION,R)
+
             ts = time.time()
             tnow = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')   
             data=tnow  
