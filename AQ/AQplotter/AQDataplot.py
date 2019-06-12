@@ -23,7 +23,8 @@ import codecs
 
 #Code to run the functions
 Sens=["OPCN3_2"]
-vals=["pm2.5", "pm10", "RH","ParticleCount","STATICMAP"]   #OPTIONS: "GPSWALK" for GPS data ,"STATICMAP" static plot map but also works with GPS data  #colums
+###vals=["pm2.5", "pm10", "RH","ParticleCount","STATICMAP"]   #OPTIONS: "GPSWALK" for GPS data ,"STATICMAP" static plot map but also works with GPS data  #colums
+vals=["pm2.5", "pm10", "RH","ParticleCount","GPSWALK"]   #OPTIONS: "GPSWALK" for GPS data ,"STATICMAP" static plot map but also works with GPS data  #colums
 ave="1T" #Data avaergae for plotting 
 #Get date for today and yesterday
 today=datetime.today().strftime("%Y-%m-%d")
