@@ -6,7 +6,7 @@ Variables for the sensors operation
 """
 #All the needed varaibles
 #RPI3 Name
-RPINAME="AQRPI4"
+RPINAME="KP_AQRPi4"
 #Desired operation mode
 
 #folder locations 
@@ -15,7 +15,7 @@ RPINAME="AQRPI4"
 FOLDER = '/home/pi/Output_Data/' #for raw data
 FOLDERCODE='/home/pi/OPC-N3_python/AQ/OPCscripts/' #For the scpirs locaton 
 #Operation location, if using with GPS use area name, add inital lat and lon
-LOC=['KP_Home','Lat','lon'] #Add test name into this too, say aersol and calbration ...
+LOC=['KP','Lat','lon'] #Add test name into this too, say aersol and calbration ...
 
 #Intergration names
 integration=10

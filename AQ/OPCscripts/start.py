@@ -150,13 +150,14 @@ if __name__ == "__main__":
             points=points+1#add a point to point arraw
             #prase to csv
             f.flush()
-            if (datetime.date.today() - datestart).days > 0:
-                #add end info 
-                #too do add write point and end time to top data
-                
-                f.close()
-                datestart = datetime.date.today()
-                f = initFile(datestart,RPI,FOLDER,LOCATION,R)
+            f.close()
+            #if (datetime.date.today() - datestart).days > 0:
+            #    #add end info 
+            #    #too do add write point and end time to top data
+            #    
+            #    f.close()
+            #    datestart = datetime.date.today()
+            #    f = initFile(datestart,RPI,FOLDER,LOCATION,R)
 
             secondsToRun = (datetime.datetime.now()-starttime).total_seconds() % inter
             time.sleep(inter-secondsToRun)

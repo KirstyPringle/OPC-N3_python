@@ -25,6 +25,7 @@ from sds_rec import SDS011 as sds
   
 #Gloabl varaibles
 FOLDER=V.FOLDER #Folder location for data save
+RAW_OUT = '/'.join([FOLDER, 'out.csv'])
 LOCATION=V.LOC[0] #RPI3 operation location
 lat=V.LOC[1]#location latatuide
 lon=V.LOC[2]#location longatuide
@@ -70,7 +71,8 @@ def initFile(date,RPI,FOLDER,LOCATION,SENSORS):
         #Add sensors information
         print("Sensors:,"+NAMES,file=f)
         #Add locations
-        print("Location:,"+LOCATION+",Lat-Lon,"+lat+","+lon,file=f)
+        #print("Location:,"+LOCATION+",Lat-Lon,"+lat+","+lon,file=f)
+        print("Location:,{},Lat-Lon,{},{}".format(LOCATION, lat, lon), file=f)
         #Add interval time
         print("Interval time,"+str(V.integration),file=f)
         #Add data columns 
@@ -158,19 +160,29 @@ if __name__ == "__main__":
                     #printe all data  and write it to the file
                     
             print(data,file=f)
+
+            # also write to 'raw' output file:
+            with open(RAW_OUT, 'a') as raw_out_file:
+                print(data, file=raw_out_file)
+                raw_out_file.flush()
+
             points=points+1#add a point to point arraw
             #prase to csv
             f.flush()
-            if (datetime.date.today() - datestart).days > 0:
-                #add end info 
-                #too do add write point and end time to top data
-                
-                f.close()
-                datestart = datetime.date.today()
-                f = initFile(datestart,RPI,FOLDER,LOCATION,R)
+            f.close()
+            #if (datetime.date.today() - datestart).days > 0:
+            #    #add end info 
+            #    #too do add write point and end time to top data
+            #    
+            #    f.close()
+            #    datestart = datetime.date.today()
+            #    f = initFile(datestart,RPI,FOLDER,LOCATION,R)
 
             secondsToRun = (datetime.datetime.now()-starttime).total_seconds() % inter
-            time.sleep(inter-secondsToRun)
+            if secondsToRun < inter and secondsToRun > 0:
+                time.sleep(inter-secondsToRun)
+            else:
+                print("Timing issue detected (secondsToRun = {}) ... not sleeping".format(secondsToRun))
 
         
         
